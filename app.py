@@ -82,7 +82,7 @@ def main():
         st.title('ricerche correlate')
         data_correlata = related_searches.get_related_searches(soup)
         data_correlata
-        st.title('ricerche correlate')
+        st.title('paa')
         data_paa = paa_results.get_paa_results(soup)
         data_paa
 
