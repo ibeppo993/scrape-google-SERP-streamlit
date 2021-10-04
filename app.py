@@ -15,7 +15,7 @@ from parserp import organic_results
 from parserp import related_searches
 from parserp import paa_results
 
-
+# https://www.andressevilla.com/running-chromedriver-with-python-selenium-on-heroku/
 
 
 def main():
@@ -57,7 +57,7 @@ def main():
         option.add_argument("--disable-dev-shm-usage")
         option.add_argument("--no-sandbox")
         #creazione e apertura browsers
-        driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=option)
+        driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=option)
 
         #driver = webdriver.Chrome(ChromeDriverManager().install(),options=option)
         #driver = webdriver.Chrome('./chromedriver',options=option)
