@@ -18,7 +18,7 @@ def get_paa_results(soup):
     div_obj['Question'] = []
 
     try:
-        html_paa_results = soup.find("div", {"jsname": "Cpkphb"})
+        html_paa_results = soup.find("div", {"class": "ifM9O"})
         print(html_paa_results)
 
         #html_paa_results = soup.find_all('div', {'class': 'related-question-pair'})
