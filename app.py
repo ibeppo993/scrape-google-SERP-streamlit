@@ -5,7 +5,7 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-import requests, urllib, bs4, selenium, datetime, re, time
+import requests, urllib, bs4, selenium, datetime, re, time, os
 from bs4 import BeautifulSoup
 from selenium import webdriver
 import pandas as pd
@@ -15,7 +15,7 @@ from parserp import organic_results
 from parserp import related_searches
 from parserp import paa_results
 
-
+# https://www.andressevilla.com/running-chromedriver-with-python-selenium-on-heroku/
 
 
 def main():
@@ -40,6 +40,10 @@ def main():
 
         #creazione e apertura browsers
         option = webdriver.ChromeOptions()
+        #Heroku 
+        option.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+        
+        
         #Removes navigator.webdriver flag
         option.add_experimental_option("excludeSwitches", ["enable-automation"])
         option.add_experimental_option('useAutomationExtension', False)
@@ -50,8 +54,12 @@ def main():
         option.add_argument("--headless")
         #incognito
         option.add_argument('--incognito')
+        option.add_argument("--disable-dev-shm-usage")
+        option.add_argument("--no-sandbox")
         #creazione e apertura browsers
-        driver = webdriver.Chrome(ChromeDriverManager().install(),options=option)
+        driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=option)
+
+        #driver = webdriver.Chrome(ChromeDriverManager().install(),options=option)
         #driver = webdriver.Chrome('./chromedriver',options=option)
         driver.maximize_window()
 
@@ -74,7 +82,7 @@ def main():
         st.title('ricerche correlate')
         data_correlata = related_searches.get_related_searches(soup)
         data_correlata
-        st.title('ricerche correlate')
+        st.title('paa')
         data_paa = paa_results.get_paa_results(soup)
         data_paa
 
